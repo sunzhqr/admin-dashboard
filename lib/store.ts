@@ -6,6 +6,7 @@ export type StoreSettings = {
   logoUrl: string
   deliveryEnabled: boolean
   whatsappEnabled: boolean
+  whatsappId?: string
 }
 
 export type Customer = {
@@ -95,11 +96,12 @@ export const useStore = create<Store>()(
           orders: state.orders.filter((o) => o.id !== id),
         })),
         settings: {
-  shopName: 'Мой Магазин',
-  logoUrl: '',
-  deliveryEnabled: true,
-  whatsappEnabled: false,
-},
+          shopName: 'Мой Магазин',
+          logoUrl: '',
+          deliveryEnabled: true,
+          whatsappEnabled: false,
+          whatsappId: '',
+        },
     updateSettings: (newSettings) =>
       set((state) => ({
         settings: { ...state.settings, ...newSettings },

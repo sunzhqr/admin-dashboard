@@ -23,7 +23,6 @@ export default function ProductsPage() {
     <div className="space-y-6">
       <h1 className="text-2xl font-bold">Товары</h1>
 
-      {/* Фильтры */}
       <div className="flex gap-4">
         <input
           placeholder="Поиск по названию"
@@ -40,7 +39,6 @@ export default function ProductsPage() {
         />
       </div>
 
-      {/* Таблица */}
       <table className="min-w-full bg-white rounded shadow overflow-hidden">
         <thead className="bg-gray-100 text-sm text-left">
           <tr>

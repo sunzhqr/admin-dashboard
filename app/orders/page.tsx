@@ -38,7 +38,6 @@ export default function OrdersPage() {
         </button>
       </div>
 
-      {/* Фильтр по статусу */}
       <div className="flex gap-3 text-sm">
         {statusList.map((status) => (
           <button
@@ -55,7 +54,6 @@ export default function OrdersPage() {
         ))}
       </div>
 
-      {/* Таблица */}
       <table className="min-w-full bg-white rounded shadow overflow-hidden">
         <thead className="bg-gray-100 text-sm text-left">
           <tr>
