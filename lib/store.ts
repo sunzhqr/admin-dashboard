@@ -1,6 +1,13 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
+export type StoreSettings = {
+  shopName: string
+  logoUrl: string
+  deliveryEnabled: boolean
+  whatsappEnabled: boolean
+}
+
 export type Customer = {
   id: string
   name: string
@@ -37,6 +44,8 @@ type Store = {
   addOrder: (order: Order) => void
   updateOrder: (order: Order) => void
   deleteOrder: (id: string) => void
+  settings: StoreSettings
+  updateSettings: (settings: Partial<StoreSettings>) => void
 }
 
 export const useStore = create<Store>()(
@@ -85,6 +94,16 @@ export const useStore = create<Store>()(
         set((state) => ({
           orders: state.orders.filter((o) => o.id !== id),
         })),
+        settings: {
+  shopName: 'Мой Магазин',
+  logoUrl: '',
+  deliveryEnabled: true,
+  whatsappEnabled: false,
+},
+    updateSettings: (newSettings) =>
+      set((state) => ({
+        settings: { ...state.settings, ...newSettings },
+      })),
     }),
     {
       name: 'product-store',
