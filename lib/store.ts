@@ -11,6 +11,7 @@ type Store = {
   products: Product[]
   addProduct: (product: Product) => void
   updateProduct: (product: Product) => void
+  deleteProduct: (id: string) => void
 }
 
 export const useStore = create<Store>()(
@@ -25,9 +26,13 @@ export const useStore = create<Store>()(
             p.id === updated.id ? updated : p
           ),
         })),
+      deleteProduct: (id) =>
+        set((state) => ({
+          products: state.products.filter((p) => p.id !== id),
+        })),
     }),
     {
-      name: 'product-store', // ключ в localStorage
+      name: 'product-store',
     }
   )
 )
