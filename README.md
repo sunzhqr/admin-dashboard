@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Админка для продавцов — MVP
 
-## Getting Started
+Это тестовое задание представляет собой стартовую админ-панель для онлайн-магазинов, разработанную на **Next.js + Tailwind + Zustand**. Продавец может управлять товарами, заказами, покупателями и базовыми настройками магазина.
 
-First, run the development server:
+---
+
+## Стек технологий
+
+- **Next.js 15 (App Router)**
+- **TypeScript**
+- **Tailwind CSS**
+- **Zustand (с persist)**
+- **Headless UI / React Dropzone / React Toastify**
+
+---
+
+## Реализованные разделы
+
+### 1. Главная (Dashboard)
+- Сводка по товарам, заказам, балансу и доставке
+- Быстрые действия (добавить товар, перейти в настройки)
+
+### 2. Товары
+- Таблица товаров
+- Добавление, редактирование, удаление
+- Фильтр по имени и цене
+
+### 3. Заказы
+- Таблица заказов с фильтрацией по статусу
+- Добавление, редактирование, удаление заказов
+
+### 4. Покупатели (CRM)
+- Таблица покупателей
+- Добавление, редактирование, удаление
+- Фильтр по имени и телефону
+
+### 5. Настройки магазина
+- Изменение названия и логотипа (drag’n’drop)
+- Включение доставки и WhatsApp-интеграции
+- WhatsApp ID
+- Сохранение локально и mock-запрос на сервер
+
+---
+
+## Запуск проекта
 
 ```bash
+git clone git@github.com:sunzhqr/admin-dashboard.git
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Возможности расширения
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Подключение к базе данных (MongoDB, Supabase, Firebase и т.п.)
+- Настоящая авторизация и многопользовательская логика
+- Поддержка нескольких магазинов
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## Скриншоты
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+![image](https://github.com/user-attachments/assets/73f2bf9f-a2ab-40fd-abf5-08221c523d14)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+![image](https://github.com/user-attachments/assets/a804be14-870e-498a-8f0f-191c24514e75)
 
-## Deploy on Vercel
+![image](https://github.com/user-attachments/assets/735c0dd4-575a-46dd-b64e-010ee05153e9)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
