@@ -11,6 +11,7 @@ const statusColor = {
   доставлен: 'bg-green-100 text-green-800',
   отменён: 'bg-red-100 text-red-800',
 }
+const statusList = ['все', 'ожидание', 'доставлен', 'отменён']
 
 export default function OrdersPage() {
   const orders = useStore(state => state.orders)
@@ -18,6 +19,12 @@ export default function OrdersPage() {
 
   const [isOpen, setIsOpen] = useState(false)
   const [editing, setEditing] = useState<Order | null>(null)
+  const [selectedStatus, setSelectedStatus] = useState<'все' | Order['status']>('все')
+
+  const filteredOrders =
+    selectedStatus === 'все'
+      ? orders
+      : orders.filter(o => o.status === selectedStatus)
 
   return (
     <div className="space-y-6">
@@ -31,6 +38,24 @@ export default function OrdersPage() {
         </button>
       </div>
 
+      {/* Фильтр по статусу */}
+      <div className="flex gap-3 text-sm">
+        {statusList.map((status) => (
+          <button
+            key={status}
+            className={`px-3 py-1 rounded ${
+              selectedStatus === status
+                ? 'bg-blue-600 text-white'
+                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+            }`}
+            onClick={() => setSelectedStatus(status as any)}
+          >
+            {status}
+          </button>
+        ))}
+      </div>
+
+      {/* Таблица */}
       <table className="min-w-full bg-white rounded shadow overflow-hidden">
         <thead className="bg-gray-100 text-sm text-left">
           <tr>
@@ -43,14 +68,14 @@ export default function OrdersPage() {
           </tr>
         </thead>
         <tbody>
-          {orders.length === 0 && (
+          {filteredOrders.length === 0 && (
             <tr>
               <td colSpan={6} className="p-3 text-gray-400 italic">
                 Нет заказов
               </td>
             </tr>
           )}
-          {orders.map((o) => (
+          {filteredOrders.map((o) => (
             <tr key={o.id} className="border-t">
               <td className="p-3 font-mono">{o.id}</td>
               <td className="p-3">{o.customerName}</td>
