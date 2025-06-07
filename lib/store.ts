@@ -15,6 +15,15 @@ export type Product = {
   price: number
 }
 
+export type Order = {
+  id: string
+  customerName: string
+  status: 'ожидание' | 'доставлен' | 'отменён'
+  amount: number
+  date: string
+}
+
+
 type Store = {
   products: Product[]
   addProduct: (product: Product) => void
@@ -24,7 +33,10 @@ type Store = {
   addCustomer: (customer: Customer) => void
   updateCustomer: (customer: Customer) => void
   deleteCustomer: (id: string) => void
-
+  orders: Order[]
+  addOrder: (order: Order) => void
+  updateOrder: (order: Order) => void
+  deleteOrder: (id: string) => void
 }
 
 export const useStore = create<Store>()(
@@ -57,6 +69,21 @@ export const useStore = create<Store>()(
       deleteCustomer: (id) =>
         set((state) => ({
           customers: state.customers.filter((c) => c.id !== id),
+        })),
+      orders: [],
+      addOrder: (order) =>
+        set((state) => ({
+          orders: [...state.orders, order],
+        })),
+      updateOrder: (updated) =>
+        set((state) => ({
+          orders: state.orders.map((o) =>
+            o.id === updated.id ? updated : o
+          ),
+        })),
+      deleteOrder: (id) =>
+        set((state) => ({
+          orders: state.orders.filter((o) => o.id !== id),
         })),
     }),
     {
