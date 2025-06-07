@@ -1,53 +1,45 @@
 'use client'
 
 import { Dialog, Transition } from '@headlessui/react'
-import { Fragment, useState } from 'react'
-import { useStore } from '../lib/store'
-import { v4 as uuidv4 } from 'uuid'
+import { Fragment, useState, useEffect } from 'react'
+import { Product, useStore } from '../lib/store'
 import { toast } from 'react-toastify'
 
-
 type Props = {
-  isOpen: boolean
+  product: Product | null
   onClose: () => void
 }
 
-export function AddProductModal({ isOpen, onClose }: Props) {
+export function EditProductModal({ product, onClose }: Props) {
   const [name, setName] = useState('')
   const [price, setPrice] = useState('')
-  const addProduct = useStore(state => state.addProduct)
+  const updateProduct = useStore(state => state.updateProduct)
+
+  useEffect(() => {
+    if (product) {
+      setName(product.name)
+      setPrice(product.price.toString())
+    }
+  }, [product])
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    addProduct({
-        id: uuidv4(),
-        name,
-        price: Number(price),
-    })
-    toast.success('Товар добавлен!')
-    setName('')
-    setPrice('')
+    if (!product) return
+    updateProduct({ ...product, name, price: Number(price) })
+    toast.success('Товар обновлён!')
     onClose()
   }
 
   return (
-    <Transition show={isOpen} as={Fragment}>
+    <Transition show={!!product} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={onClose}>
-        <Transition.Child
-          as={Fragment}
-          enter="ease-out duration-200"
-          enterFrom="opacity-0"
-          enterTo="opacity-100"
-          leave="ease-in duration-150"
-          leaveFrom="opacity-100"
-          leaveTo="opacity-0"
-        >
-          <div className="fixed inset-0 bg-black/30 backdrop-blur-sm" />
+        <Transition.Child as={Fragment}>
+          <div className="fixed inset-0 bg-black/30" />
         </Transition.Child>
 
         <div className="fixed inset-0 z-10 flex items-center justify-center p-4">
           <Dialog.Panel className="w-full max-w-md rounded-xl bg-white p-6 shadow-xl">
-            <Dialog.Title className="text-lg font-bold mb-4">Добавить товар</Dialog.Title>
+            <Dialog.Title className="text-lg font-bold mb-4">Редактировать товар</Dialog.Title>
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>

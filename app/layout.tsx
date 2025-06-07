@@ -1,6 +1,10 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Sidebar } from '../components/Sidebar'
+import 'react-toastify/dist/ReactToastify.css'
+import { ToastContainer } from 'react-toastify'
+
+<ToastContainer position="top-right" autoClose={2000} />
 
 export const metadata: Metadata = {
   title: 'Admin Panel',
